@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dinosaur Game</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+    .game-container {
+      width: 100vw;
+      height: 100vh;
+      background: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+    }
+    .dino {
+      width: 40px;
+      height: 40px;
+      background: #555;
+      border-radius: 5px;
+      position: absolute;
+      bottom: 50px;
+      left: 50px;
+    }
+    .obstacle {
+      width: 20px;
+      height: 40px;
+      background: #c33;
+      position: absolute;
+      bottom: 50px;
+      right: 0;
+    }
+    .score {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <div class="score">Score: 0</div>
+    <div class="dino"></div>
+  </div>
+
+  <script>
+    const gameContainer = document.querySelector('.game-container');
+    const dino = document.querySelector('.dino');
+    const scoreElement = document.querySelector('.score');
+
+    let isJumping = false;
+    let score = 0;
+    let gameOver = false;
+
+    function jump() {
+      if (isJumping) return;
+      isJumping = true;
+      let jumpHeight = 0;
+      const jumpInterval = setInterval(() => {
+        if (jumpHeight >= 150) {
+          clearInterval(jumpInterval);
+          const fallInterval = setInterval(() => {
+            if (jumpHeight <= 0) {
+              clearInterval(fallInterval);
+              isJumping = false;
+            } else {
+              jumpHeight -= 5;
+              dino.style.bottom = `${jumpHeight + 50}px`;
+            }
+          }, 20);
+        } else {
+          jumpHeight += 5;
+          dino.style.bottom = `${jumpHeight + 50}px`;
+        }
+      }, 20);
+    }
+
+    function createObstacle() {
+      if (gameOver) return;
+
+      const obstacle = document.createElement('div');
+      obstacle.classList.add('obstacle');
+      gameContainer.appendChild(obstacle);
+      let obstaclePosition = window.innerWidth;
+
+      const obstacleInterval = setInterval(() => {
+        if (gameOver) {
+          clearInterval(obstacleInterval);
+          obstacle.remove();
+          return;
+        }
+
+        if (obstaclePosition < -20) {
+          clearInterval(obstacleInterval);
+          obstacle.remove();
+          score++;
+          scoreElement.textContent = `Score: ${score}`;
+        } else if (
+          obstaclePosition > 50 &&
+          obstaclePosition < 90 &&
+          parseInt(dino.style.bottom) < 90
+        ) {
+          clearInterval(obstacleInterval);
+          gameOver = true;
+          alert(`Game Over! Final Score: ${score}`);
+          location.reload();
+        } else {
+          obstaclePosition -= 10;
+          obstacle.style.left = `${obstaclePosition}px`;
+        }
+      }, 20);
+    }
+
+    function startGame() {
+      setInterval(() => {
+        if (!gameOver) {
+          createObstacle();
+        }
+      }, 2000);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+          jump();
+        }
+      });
+    }
+
+    startGame();
+  </script>
+</body>
+</html>

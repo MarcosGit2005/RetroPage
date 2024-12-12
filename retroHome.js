@@ -12,11 +12,11 @@ guante.addEventListener('animationend', () => {
     guante.classList.add('guanteAnimado');
 });
 
-
 let isJumping = false;
 let score = 0;
 let gameOver = false;
 const warioRueda = document.querySelector('.warioRueda');
+const ruedaJuego = document.querySelector('.ruedaJuego');
 const cocheWario = document.querySelector('.cocheWario');
 const logoJuego =  document.querySelector('.logo');
 const startFlex =  document.querySelector('.startFlex');
@@ -35,6 +35,11 @@ function jump() {
     const jumpInterval = setInterval(() => {
         // Aplicar movimiento
         jumpHeight += velocity;
+        if (jumpHeight<150 && velocity>0){
+          ruedaJuego.classList.add('ruedaInflada');
+        } else{
+          ruedaJuego.classList.remove('ruedaInflada');
+        }
         velocity += gravity; // Reducir velocidad al subir, incrementarla al bajar
 
         // Actualizar la posición
