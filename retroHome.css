@@ -1,0 +1,315 @@
+body{
+    margin: 0;
+    overflow: hidden;
+    cursor: url(./res/hud/cursor.png),auto;
+}
+.gridContaier{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 250px 250px;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(./res/background/Sky.png);
+    background-size: 2301px 900px;
+    animation: skyScroll 80s linear infinite;
+}
+.logo{
+    height: 350px;
+    width: 1012px;
+    background-image: url(./res/hud/LOGO.png);
+    grid-column: 2/4;
+    grid-row: 1/3;
+    z-index: 3;
+    align-self: center;
+    animation: logo 5s steps(15,end);
+}
+.startFlex{
+    display: flex;
+    grid-column: 2/4;
+    grid-row: 2/4;
+    z-index: 3;
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+    gap: 20px;
+}
+.guante{
+    height: 80px;
+    width: 80px;
+    background-image: url(./res/hud/Guante.png);
+    animation: appear 1s steps(1,end);
+    animation-delay: 4s;
+    opacity: 0;
+}
+.guanteAnimado{
+    opacity: 1;
+    animation: guanteAnimation 0.4s infinite steps(1,end);
+}
+.startButton{
+    height: 60px;
+    width: 480px;
+    background-image: url(./res/hud/BotonStart.png);
+    animation: startButton 1s;
+    animation-delay: 4s;
+    opacity: 0;
+    transition: ease 0.1s;
+}
+.startButton:is(.visible):hover{
+    cursor: url(./res/hud/cursorHover.png),pointer;
+    transform: scale(1.05);
+}
+.startButton:is(.visible):active{
+    transform: scale(0.95);
+}
+.visible{
+    opacity: 1;
+}
+.nintendo{
+    height: 65px;
+    width: 605px;
+    background-image: url(./res/hud/NINTENDO.png);
+    grid-column: 2/4;
+    grid-row: 4/5;
+    z-index: 3;
+    align-self: flex-end;
+    justify-self: center;
+    animation: logo 5s steps(1,end);
+    transition: transform 0.2s ease;
+}
+.nintendo:hover{
+    background-image: url(./res/hud/MARCOS2024.png);
+    transform: rotateX(360deg);
+}
+.background-rocks {
+    background: url(./res/background/BackgroudRocks.png);
+    animation: backgroundRocksScroll 60s linear infinite;
+    grid-row: 2/5;
+    grid-column: 1/4;
+    height: 720px;
+    width: 100vw;
+    position: absolute;
+    background-size: cover;
+    bottom: 0;
+}
+.highwayToHell{
+    background: url(./res/background/HighwayToHell.png);
+    background-size: contain;
+    height: 350px;
+    width: 2390px;
+    position: absolute;
+    bottom: 0;
+    z-index: 2;
+    align-self: center;
+    justify-self: center;
+    animation: highwayToHellScroll 1.5s linear infinite;
+}
+.cocheWario{
+    height: 200px;
+    width: 450px;
+    grid-row: 3/5;
+    grid-column: 3/5;
+    position: relative;
+    top: 50px;
+    z-index: 4;
+    align-self: center;
+    justify-self: center;
+    transition: all 0.8s ease-in-out;
+    animation: cocheMovimiento 3s alternate-reverse ease infinite;
+}
+.coche{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 20px;
+    background-image: url(./res/coche/Coche.png);
+    animation: cocheVibracion 0.05s linear infinite;
+    animation-direction: alternate-reverse;
+}
+.coche > .ruedas{
+    display: flex;
+    width: 100%;
+    padding-left: 15px;
+    position: relative;
+    bottom: 30px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-content: start;
+}
+.coche > .ruedas > .rueda{
+    background-image: url(./res/coche/Rueda.png);
+    height: 80px;
+    width: 80px;
+    z-index: -1;
+    animation: ruedasGiro 0.5s linear infinite;
+}
+.Wario{
+    background-image: url(./res/coche/Wario.png);
+    position: relative;
+    left: 230px;
+    bottom: 40px;
+    height: 134px;
+    width: 120px;
+    background-repeat: no-repeat;
+    z-index: -1;
+    animation: warioVibracion 0.1s linear infinite;
+    animation-direction: alternate-reverse;
+}
+.brazoWario{
+    background-image: url(./res/coche/Brazo.png);
+    position: relative;
+    left: 280px;
+    bottom: 146px;
+    height: 64px;
+    width: 120px;
+    background-repeat: no-repeat;
+    z-index: 5;
+    animation: warioVibracion 0.1s linear infinite;
+    animation-direction: alternate-reverse;
+}
+.polvo{
+    background-image: url(./res/coche/polvoAnimation/Polvo1.png);
+    position: relative;
+    left: 370px;
+    bottom: 116px;
+    height: 56px;
+    width: 192px;
+    background-repeat: no-repeat;
+    z-index: 5;
+    animation: polvoAnimacion 0.25s steps(1,end) infinite;
+}
+@keyframes skyScroll {
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 2301px;
+    }
+}
+@keyframes backgroundRocksScroll {
+    0% {
+      background-position-x: 0;
+    }
+    100% {
+        background-position-x: 2409px;
+    }
+}
+@keyframes highwayToHellScroll{
+    0% {
+        background-position-x: 0;
+    }
+    100% {
+        background-position-x: 1195px;
+    }
+}
+@keyframes ruedasGiro {
+    0%{transform: rotate(0);}
+    100%{transform: rotate(-360deg);}
+}
+@keyframes cocheVibracion {
+    0%{
+        background-position-x:0;
+        background-position-y:0;
+    }
+    100%{
+        background-position-x:-4px;
+        background-position-y:-4px;
+    }
+}
+@keyframes warioVibracion {
+    0%{
+        background-position-x:4;
+        background-position-y:4px;
+    }
+    100%{
+        background-position-x:-2px;
+        background-position-y:0;
+    }
+}
+@keyframes cocheMovimiento {
+    0%{transform: translateX(0);}
+    100%{transform: translateX(-60px);}
+}
+@keyframes polvoAnimacion {
+    0%{background-image: url(./res/coche/polvoAnimation/Polvo1.png);}
+    25%{background-image: url(./res/coche/polvoAnimation/Polvo2.png);}
+    50%{background-image: url(./res/coche/polvoAnimation/Polvo3.png);}
+    75%{background-image: url(./res/coche/polvoAnimation/Polvo4.png);}
+}
+@keyframes logo{
+    0%{opacity: 0%;}
+    100%{opacity: 100%;}
+}
+@keyframes startButton {
+    0%{
+        transform: translateX(2000px);
+        opacity: 1;
+    }
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes appear {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+@keyframes guanteAnimation {
+    0%{transform: translateX(0);}
+    25%{transform: translateX(-4px);}
+    50%{transform: translateX(-8px);}
+    75%{transform: translateX(-12px);}
+}
+
+/*************************************************************************/
+.warioRueda{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 90px;
+    right: 380px;
+    z-index: 5;
+    visibility: hidden;
+}
+.warioRunner{
+    height: 140px;
+    width: 120px;
+    background-image: url(./res/game/warioAnimation/WarioIdle.png);
+    animation: warioRunning 1s steps(1,end) infinite;
+}
+.ruedaJuego{
+    background-image: url(./res/coche/Rueda.png);
+    height: 80px;
+    width: 80px;
+    animation: ruedasGiro 1s linear infinite;
+}
+.polvoJuego{
+    background-image: url(./res/coche/polvoAnimation/Polvo1.png);
+    position: absolute;
+    bottom: 90px;
+    right: 230px;
+    background-repeat: no-repeat;
+    z-index: 5;
+    height: 56px;
+    width: 192px;
+    animation: polvoAnimacion 0.25s steps(1,end) infinite;
+    visibility: hidden;
+}
+@keyframes warioRunning {
+    0%{background-image: url(./res/game/warioAnimation/WarioLeft1.png);}
+    10%{background-image: url(./res/game/warioAnimation/WarioLeft2.png);}
+    20%{background-image: url(./res/game/warioAnimation/WarioLeft3.png);}
+    30%{background-image: url(./res/game/warioAnimation/WarioLeft4.png);}
+    40%{background-image: url(./res/game/warioAnimation/WarioIdle.png);}
+    50%{background-image: url(./res/game/warioAnimation/WarioRight1.png);}
+    60%{background-image: url(./res/game/warioAnimation/WarioRight2.png);}
+    70%{background-image: url(./res/game/warioAnimation/WarioRight3.png);}
+    80%{background-image: url(./res/game/warioAnimation/WarioRight4.png);}
+    90%{background-image: url(./res/game/warioAnimation/WarioIdle.png);}
+}
+@keyframes  ruedaInflada{
+    from{transform: scale(1);}
+    to{transform: scale(1.2);}
+}
+/*************************************************************************/
