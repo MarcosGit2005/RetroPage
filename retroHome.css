@@ -306,6 +306,14 @@ body{
     animation: polvoAnimacion 0.25s steps(1,end) infinite;
     visibility: hidden;
 }
+.obstacle {
+    width: 80px;
+    height: 80px;
+    background: #c33;
+    position: absolute;
+    bottom: 90px;
+    z-index: 5;
+}
 @keyframes warioRunning {
     0%{background-image: url(./res/game/warioAnimation/WarioLeft1.png);}
     10%{background-image: url(./res/game/warioAnimation/WarioLeft2.png);}
